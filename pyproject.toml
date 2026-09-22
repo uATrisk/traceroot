@@ -46,6 +46,7 @@ dependencies = [
     # PostgreSQL (for standard model pricing lookup)
     "psycopg2-binary>=2.9",
     "bullmq>=2.25,<3",
+    "mcp>=2.2.0,<3.0.0",
 ]
 
 [dependency-groups]
