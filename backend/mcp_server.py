@@ -42,7 +42,10 @@ async def list_recent_traces(
     """
     auth = await _get_auth()
 
-    parsed_start_after = datetime.fromisoformat(start_after) if start_after else None
+    try:
+        parsed_start_after = datetime.fromisoformat(start_after) if start_after else None
+    except ValueError as e:
+        raise RuntimeError(f"Invalid start_after format: {e}") from e
 
     service = get_trace_reader_service()
     result = service.list_traces(

@@ -66,3 +66,12 @@ async def test_list_recent_traces_auth_failure(monkeypatch, mock_service):
 
     # Ensure service was never called
     mock_service.list_traces.assert_not_called()
+
+
+@pytest.mark.asyncio
+async def test_list_recent_traces_invalid_start_after(mock_auth, mock_service):
+    """Invalid start_after raises expected error and service is not called."""
+    with pytest.raises(RuntimeError, match="Invalid start_after format:"):
+        await list_recent_traces(start_after="not-a-date")
+
+    mock_service.list_traces.assert_not_called()
